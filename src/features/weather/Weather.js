@@ -7,13 +7,14 @@ import {
   set_current_temperature,
   selectWeather,
 } from './weatherSlices';
+import styles from './weather.module.css';
 
 export const Weather = () => {
   const weather = useSelector(selectWeather);
   const dispatch = useDispatch();
 
   return (
-    <div>
+    <div className={styles.container}>
       <h1>Current City: {weather.actual_city}</h1>
       {['Wrocław', 'Oleśnica', 'Warszawa'].map(city => (
         <button
@@ -43,6 +44,21 @@ export const Weather = () => {
         }}
       >
         Decrement Temperature
+      </button>
+      <br />
+      <button
+        onClick={() => {
+          dispatch(set_temperature_unit('C'));
+        }}
+      >
+        Celsius
+      </button>
+      <button
+        onClick={() => {
+          dispatch(set_temperature_unit('F'));
+        }}
+      >
+        Fahrenheit
       </button>
       <hr />
       <h3>Favourite Cities:</h3>
