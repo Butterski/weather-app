@@ -1,0 +1,24 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    width: 90%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.city_name {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.favourite_star {
+    cursor: pointer;
+}
+
+.star_icon {
+    width: 24px;
+    height: 24px;
+}

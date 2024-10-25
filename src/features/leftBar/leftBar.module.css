@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 30%;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+    border-radius: 0 15px 15px 0;
+    align-items: center;
+}
+.recent_cities_container {
+    display: flex;
+    flex-direction: column;
+    height: 40%;
+    align-items: center;
+}
+.divider {
+    width: 90%;
+    height: 1px;
+    background-color: #ccc;
+}
