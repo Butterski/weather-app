@@ -1,99 +1,32 @@
 import React from 'react';
-import {useSelector, useDispatch} from 'react-redux';
-import {
-    set_city,
-    add_city,
-    set_temperature_unit,
-    set_current_temperature,
-    selectWeather,
-} from '../../redux/weatherSlices';
+import { useSelector } from 'react-redux';
+import { selectWeather } from '../../redux/weatherSlices';
 import styles from './weather.module.css';
 
 export const Weather = () => {
     const weather = useSelector(selectWeather);
-    const dispatch = useDispatch();
+
+    const getBackgroundStyle = (temperature) => {
+        if (temperature <= 0) {
+            return 'radial-gradient(circle, rgba(0, 198, 255, 0.3), rgba(0, 114, 255, 0.3))';
+        } else if (temperature > 0 && temperature <= 15) {
+            return 'radial-gradient(circle, rgba(251, 194, 235, 0.3), rgba(166, 193, 238, 0.3))';
+        } else if (temperature > 15 && temperature <= 30) {
+            return 'radial-gradient(circle, rgba(253, 219, 146, 0.3), rgba(209, 253, 255, 0.3))';
+        } else {
+            return 'radial-gradient(circle, rgba(255, 81, 47, 0.3), rgba(221, 36, 118, 0.3))';
+        }
+    };
 
     return (
-        <div className={styles.container}>
-            <h1>Current City: {weather.actual_city}</h1>
-            {['Wrocław', 'Oleśnica', 'Warszawa'].map(city => (
-                <button
-                    key={city}
-                    onClick={() => {
-                        dispatch(set_city(city));
-                    }}
-                >
-                    {city}
-                </button>
-            ))}
-
-            <hr />
-            <h2>
-                Temperature: {weather.current_temperature}°
-                {weather.temperature_unit}
-            </h2>
-            <button
-                onClick={() => {
-                    dispatch(
-                        set_current_temperature(
-                            weather.current_temperature + 1,
-                        ),
-                    );
-                }}
-            >
-                Increment Temperature
-            </button>
-            <button
-                onClick={() => {
-                    dispatch(
-                        set_current_temperature(
-                            weather.current_temperature - 1,
-                        ),
-                    );
-                }}
-            >
-                Decrement Temperature
-            </button>
-            <br />
-            <button
-                onClick={() => {
-                    dispatch(set_temperature_unit('C'));
-                }}
-            >
-                Celsius
-            </button>
-            <button
-                onClick={() => {
-                    dispatch(set_temperature_unit('F'));
-                }}
-            >
-                Fahrenheit
-            </button>
-            <hr />
-            <h3>Favourite Cities:</h3>
-            <ul>
-                {weather.favourite_cities.map(city => (
-                    <li key={city}>{city}</li>
-                ))}
-            </ul>
-            <hr />
-
-            <h3>City History:</h3>
-            {['Wrocław', 'Oleśnica', 'Warszawa'].map(city => (
-                <button
-                    key={city}
-                    onClick={() => {
-                        dispatch(add_city(city));
-                    }}
-                >
-                    {city}
-                </button>
-            ))}
-            <ul>
-                {weather.city_history.map((city, index) => (
-                    <li key={index}>{city}</li>
-                ))}
-            </ul>
+        <div
+            className={styles.container}
+            style={{ background: getBackgroundStyle(weather.currentTemperature) }}
+        >
+            <div>
+                <div className={styles.city}>{weather.actual_city}</div>
+                <div className={styles.temperature}>{weather.currentTemperature}°{weather.temperature_unit}</div>
+            </div>
         </div>
     );
 };

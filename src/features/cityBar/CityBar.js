@@ -4,6 +4,7 @@ import {
     add_favourite_city,
     remove_favourite_city,
     selectWeather,
+    set_city,
 } from '../../redux/weatherSlices';
 import styles from './cityBar.module.css';
 
@@ -22,7 +23,12 @@ export const CityBar = ({city_name}) => {
     };
 
     return (
-        <div className={styles.container}>
+        <div
+            className={styles.container}
+            onClick={() => {
+                dispatch(set_city(city_name));
+            }}
+        >
             <div className={styles.city_name}>{city_name}</div>
             <div className={styles.favourite_star} onClick={toggleFavourite}>
                 <svg

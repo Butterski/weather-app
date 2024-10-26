@@ -7,6 +7,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .city_name {
@@ -21,4 +22,7 @@
 .star_icon {
     width: 24px;
     height: 24px;
+}
+.star_icon:hover {
+    filter: drop-shadow( 0 0 10px rgba(255, 255, 0, .5));
 }
