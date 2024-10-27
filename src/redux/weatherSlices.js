@@ -6,6 +6,7 @@ const initialState = {
     favourite_cities: ['Oleśnica', 'Wrocław'],
     temperature_unit: 'C',
     current_temperature: 0,
+    weather_data: {},
 };
 
 export const weatherSlice = createSlice({
@@ -33,6 +34,10 @@ export const weatherSlice = createSlice({
                 city => city !== action.payload,
             );
         },
+        set_weather_data: (state, action) => {
+            state.weather_data = action.payload;
+            state.current_temperature = action.payload.main.temp;
+        },
     },
 });
 
@@ -43,6 +48,7 @@ export const {
     set_current_temperature,
     add_favourite_city,
     remove_favourite_city,
+    set_weather_data,
 } = weatherSlice.actions;
 
 // The function below is called a selector and allows us to select a value from

@@ -10,8 +10,8 @@ export const LeftBar = () => {
 
     return (
         <div className={styles.container}>
+            <h1>Recent Cities</h1>
             <div className={styles.recent_cities_container}>
-                <h1>Recent Cities</h1>
                 {weather.city_history.map((city, index) => (
                     <CityBar key={index} city_name={city} />
                 ))}

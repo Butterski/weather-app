@@ -1,20 +1,24 @@
 import React from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import {
     add_favourite_city,
     remove_favourite_city,
     selectWeather,
     set_city,
+    add_city
 } from '../../redux/weatherSlices';
 import styles from './cityBar.module.css';
 
-export const CityBar = ({city_name}) => {
+export const CityBar = ({ city_name }) => {
     const dispatch = useDispatch();
-    const {favourite_cities} = useSelector(selectWeather);
+    const navigate = useNavigate();
+    const { favourite_cities } = useSelector(selectWeather);
 
     const isFavourite = favourite_cities.includes(city_name);
 
-    const toggleFavourite = () => {
+    const toggleFavourite = (e) => {
+        e.stopPropagation();
         if (isFavourite) {
             dispatch(remove_favourite_city(city_name));
         } else {
@@ -22,12 +26,16 @@ export const CityBar = ({city_name}) => {
         }
     };
 
+    const handleCityClick = () => {
+        dispatch(set_city(city_name));
+        dispatch(add_city(city_name));
+        navigate(`/${city_name}`);
+    };
+
     return (
         <div
             className={styles.container}
-            onClick={() => {
-                dispatch(set_city(city_name));
-            }}
+            onClick={handleCityClick}
         >
             <div className={styles.city_name}>{city_name}</div>
             <div className={styles.favourite_star} onClick={toggleFavourite}>
