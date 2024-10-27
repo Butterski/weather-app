@@ -7,6 +7,7 @@ import {useSelector} from 'react-redux';
 import {selectWeather} from './redux/weatherSlices';
 import {Home} from './features/home/Home';
 
+
 function App() {
     const weather = useSelector(selectWeather);
     return (
